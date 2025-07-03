@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float speed = 10f;
+    [SerializeField] Gm manager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,15 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            Gm.instance.InitiateGameOver();
+        }
+        else{
+       
+            Gm.instance.IncreaseScore(10);
+
+        }
         Destroy(gameObject);
         Destroy(collision.gameObject);
     }
